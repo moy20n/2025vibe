@@ -72,7 +72,9 @@ st.write("300곡 이상 보유한 플레이리스트에서 랜덤으로 노래�
 
 if st.button("✨ 노래 추천 받기!"):
     title = random.choice(base_songs)
-    st.markdown(f"<div class='result-box'>🎶 <strong>추천곡:</strong> {title}</div>", unsafe_allow_html=True)
+    search_query = title.replace(" ", "+")
+    youtube_url = f"https://www.youtube.com/results?search_query={search_query}"
+    st.markdown(f"<div class='result-box'>🎶 <strong>추천곡:</strong> <a href='{youtube_url}' target='_blank'>{title}</a></div>", unsafe_allow_html=True)
 
 if st.checkbox("📜 전체 추천곡 리스트 보기"):
     st.markdown("### 🎵 전체 추천곡 리스트")

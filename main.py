@@ -51,6 +51,19 @@ st.markdown("""
         transform: scale(1.05);
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
+    .result-box {
+        font-size: 1.4rem;
+        background: #fff7e6;
+        border-left: 6px solid #ffc107;
+        padding: 1em;
+        margin-top: 1em;
+        border-radius: 0.5em;
+        animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+        0% {opacity: 0; transform: translateY(10px);}
+        100% {opacity: 1; transform: translateY(0);}
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -59,7 +72,7 @@ st.write("300곡 이상 보유한 플레이리스트에서 랜덤으로 노래�
 
 if st.button("✨ 노래 추천 받기!"):
     title = random.choice(base_songs)
-    st.success(f"🎶 **추천곡:** {title}")
+    st.markdown(f"<div class='result-box'>🎶 <strong>추천곡:</strong> {title}</div>", unsafe_allow_html=True)
 
 if st.checkbox("📜 전체 추천곡 리스트 보기"):
     st.markdown("### 🎵 전체 추천곡 리스트")

@@ -22,7 +22,9 @@ song_library = {}
 def generate_song(genre, mood):
     base_url = "https://open.spotify.com/search/"
     return [
-        (f"{genre} Artist 1 - {mood} Song A", base_url + urllib.parse.quote(f"{genre} {mood} Song A")),
+        ("아티스트 A - 감성적인 노래 A", base_url + urllib.parse.quote("감성적인 노래 A")),
+        ("아티스트 B - 감성적인 노래 B", base_url + urllib.parse.quote("감성적인 노래 B")),
+        ("아티스트 C - 감성적인 노래 C", base_url + urllib.parse.quote("감성적인 노래 C"))),
         (f"{genre} Artist 2 - {mood} Song B", base_url + urllib.parse.quote(f"{genre} {mood} Song B")),
         (f"{genre} Artist 3 - {mood} Song C", base_url + urllib.parse.quote(f"{genre} {mood} Song C"))
     ]

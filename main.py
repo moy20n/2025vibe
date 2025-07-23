@@ -70,11 +70,14 @@ st.markdown("""
 st.title("🎧 노래 랜덤 추천기")
 st.write("300곡 이상 보유한 플레이리스트에서 랜덤으로 노래를 추천해드릴게요!")
 
+num_recommend = st.slider("🎵 몇 곡 추천받고 싶으신가요?", min_value=1, max_value=10, value=1)
+
 if st.button("✨ 노래 추천 받기!"):
-    title = random.choice(base_songs)
-    search_query = title.replace(" ", "+")
-    youtube_url = f"https://www.youtube.com/results?search_query={search_query}"
-    st.markdown(f"<div class='result-box'>🎶 <strong>추천곡:</strong> <a href='{youtube_url}' target='_blank'>{title}</a></div>", unsafe_allow_html=True)
+    titles = random.sample(base_songs, k=num_recommend)
+    for title in titles:
+        search_query = title.replace(" ", "+")
+        youtube_url = f"https://www.youtube.com/results?search_query={search_query}"
+        st.markdown(f"<div class='result-box'>🎶 <strong>추천곡:</strong> <a href='{youtube_url}' target='_blank'>{title}</a></div>", unsafe_allow_html=True)
 
 if st.checkbox("📜 전체 추천곡 리스트 보기"):
     st.markdown("### 🎵 전체 추천곡 리스트")
@@ -82,4 +85,19 @@ if st.checkbox("📜 전체 추천곡 리스트 보기"):
         st.write(f"- {song}")
 
 st.markdown("---")
+st.markdown("---")
+
+# 사용자 추천 입력
+st.subheader("📝 나만의 추천곡 추가하기")
+new_song = st.text_input("🎶 추가하고 싶은 곡을 '가수 - 제목' 형식으로 입력하세요:")
+if st.button("➕ 추천곡 추가하기"):
+    if new_song.strip():
+        if new_song not in base_songs:
+            base_songs.append(new_song)
+            st.success(f"✅ 추천곡이 추가되었습니다: {new_song}")
+        else:
+            st.info("이미 존재하는 곡입니다!")
+    else:
+        st.warning("곡 제목을 입력해주세요!")
+
 st.caption("Made with ❤️ by ChatGPT")

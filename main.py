@@ -129,3 +129,8 @@ mood = clean_moods[sel_mood]
 if st.button("✨ 노래 추천 받기!"):
     key = (genre, mood)
     songs = song_library.get(key, [])
+    title = random.choice(songs) if songs else "추천곡이 없습니다."
+    st.success(f"🎶 **추천곡:** {title}")
+
+st.markdown("---")
+st.caption("Made with ❤️ by ChatGPT")

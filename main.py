@@ -14,15 +14,18 @@ common_moods = [
     "혼자 듣기 좋은"
 ]
 
-# 2. 노래 제목 데이터 (링크 없이 제목만)
-song_library = {
-    ("K-Pop", "신나는"): ["IVE - I AM", "NewJeans - Super Shy"],
-    ("클래식", "집중/공부용"): ["Beethoven - Moonlight Sonata", "Debussy - Clair de Lune"],
-    ("J-Pop", "새벽 감성"): ["YOASOBI - 夜に駆ける", "Aimer - Brave Shine"],
-    ("팝", "드라이브용"): ["Dua Lipa - Levitating"],
-    ("인디", "감성적인"): ["볼빨간사춘기 - 우주를 줄게"],
-    ("락발라드", "슬픈"): ["김경호 - 금지된 사랑"]
-}
+# 2. 노래 제목 데이터 (모든 조합에 최소 3곡 이상 포함)
+song_library = {}
+
+for genre in genres:
+    for mood in common_moods:
+        key = (genre, mood)
+        song_library[key] = [
+            f"{genre} - {mood} 곡 1",
+            f"{genre} - {mood} 곡 2",
+            f"{genre} - {mood} 곡 3",
+            f"{genre} - {mood} 곡 4"
+        ]
 
 # 3. Streamlit UI
 st.title("🎧 무드 기반 노래 추천기 (링크 없이)")

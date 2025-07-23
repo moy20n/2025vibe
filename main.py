@@ -38,12 +38,18 @@ base_songs = [
 st.markdown("""
     <style>
     .stButton > button {
-        font-size: 1.2rem;
-        padding: 0.5em 2em;
-        border-radius: 0.5em;
-        background-color: #ffccf9;
-        color: #333;
+        font-size: 1.3rem;
+        padding: 0.7em 2.5em;
+        border-radius: 1em;
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        color: white;
         border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+    .stButton > button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
     </style>
 """, unsafe_allow_html=True)

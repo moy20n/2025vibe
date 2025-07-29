@@ -3,7 +3,7 @@ import random
 
 st.set_page_config(page_title="무드 기반 노래 추천기 🎵", page_icon="🎧")
 
-# 1. 대량의 노래 추천 리스트 (장르, 무드 구분 없이 다양한 스타일 포함)
+# 전체 곡 리스트
 base_songs = [
     "NewJeans - Super Shy", "IVE - I AM", "LE SSERAFIM - UNFORGIVEN", "BTS - Dynamite", "BLACKPINK - DDU-DU DDU-DU",
     "TWICE - Likey", "Red Velvet - Psycho", "SEVENTEEN - Rock With You", "EXO - Love Shot", "ITZY - WANNABE",
@@ -34,31 +34,32 @@ base_songs = [
     "Billlie - Ring x Ring", "Purple Kiss - Zombie", "LOONA - Why Not?", "WJSN - Save Me Save You", "APRIL - LALALILALA"
 ]
 
-# 2. Streamlit UI 꾸미기
+# 💠 스타일 커스터마이징 (하늘색 테마)
 st.markdown("""
     <style>
     .stButton > button {
         font-size: 1.3rem;
-        padding: 0.7em 2.5em;
-        border-radius: 1em;
-        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        padding: 0.6em 2em;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #cceeff 0%, #99ccff 100%);
         color: white;
         border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 100, 200, 0.1);
+        transition: all 0.2s ease-in-out;
     }
     .stButton > button:hover {
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: linear-gradient(135deg, #99ccff 0%, #6699ff 100%);
+        transform: scale(1.04);
     }
     .result-box {
-        font-size: 1.4rem;
-        background: #fff7e6;
-        border-left: 6px solid #ffc107;
-        padding: 1em;
+        font-size: 1.2rem;
+        background: #e6f4ff;
+        border-left: 5px solid #66b2ff;
+        padding: 0.9em;
         margin-top: 1em;
         border-radius: 0.5em;
-        animation: fadeIn 0.6s ease-in-out;
+        color: #003366;
+        animation: fadeIn 0.5s ease-in-out;
     }
     @keyframes fadeIn {
         0% {opacity: 0; transform: translateY(10px);}
@@ -67,37 +68,37 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🎧 노래 랜덤 추천기")
-st.write("300곡 이상 보유한 플레이리스트에서 랜덤으로 노래를 추천해드릴게요!")
+# 🎧 앱 타이틀
+st.title("🎧 무드 기반 노래 추천기")
+st.write("300곡 이상의 플레이리스트에서 랜덤으로 노래를 추천해드려요!")
 
-num_recommend = st.slider("🎵 몇 곡 추천받고 싶으신가요?", min_value=1, max_value=10, value=1)
+# 🎵 추천 곡 수 선택
+num_recommend = st.slider("몇 곡을 추천받고 싶으신가요?", min_value=1, max_value=10, value=1)
 
+# ✨ 노래 추천 버튼
 if st.button("✨ 노래 추천 받기!"):
-    titles = random.sample(base_songs, k=num_recommend)
-    for title in titles:
-        search_query = title.replace(" ", "+")
-        youtube_url = f"https://www.youtube.com/results?search_query={search_query}"
-        st.markdown(f"<div class='result-box'>🎶 <strong>추천곡:</strong> <a href='{youtube_url}' target='_blank'>{title}</a></div>", unsafe_allow_html=True)
+    if len(base_songs) < num_recommend:
+        st.warning("추천 가능한 곡 수보다 많은 수를 요청하셨어요!")
+    else:
+        titles = random.sample(base_songs, k=num_recommend)
+        for title in titles:
+            search_query = title.replace(" ", "+")
+            youtube_url = f"https://www.youtube.com/results?search_query={search_query}"
+            st.markdown(
+                f"<div class='result-box'>🎶 <strong>추천곡:</strong> <a href='{youtube_url}' target='_blank'>{title}</a></div>",
+                unsafe_allow_html=True
+            )
 
+# 📜 전체 리스트 토글
 if st.checkbox("📜 전체 추천곡 리스트 보기"):
-    st.markdown("### 🎵 전체 추천곡 리스트")
+    st.markdown("### 🎼 전체 추천곡 리스트")
     for song in base_songs:
         st.write(f"- {song}")
 
+# 📝 사용자 추천 입력
 st.markdown("---")
-st.markdown("---")
-
-# 사용자 추천 입력
 st.subheader("📝 나만의 추천곡 추가하기")
-new_song = st.text_input("🎶 추가하고 싶은 곡을 '가수 - 제목' 형식으로 입력하세요:")
-if st.button("➕ 추천곡 추가하기"):
-    if new_song.strip():
-        if new_song not in base_songs:
-            base_songs.append(new_song)
-            st.success(f"✅ 추천곡이 추가되었습니다: {new_song}")
-        else:
-            st.info("이미 존재하는 곡입니다!")
-    else:
-        st.warning("곡 제목을 입력해주세요!")
+new_song = st.text_input("🎶 추가할 곡을 '가수 - 제목' 형식으로 입력하세요:")
 
-st.caption("Made with ❤️ by ChatGPT")
+if st.button("➕ 추천곡 추가하기"):
+    if new_song.str_

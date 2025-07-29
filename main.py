@@ -1,4 +1,4 @@
-아니야.. 그냥 import streamlit as st
+import streamlit as st
 import random
 
 st.set_page_config(page_title="무드 기반 노래 추천기 🎵", page_icon="🎧")

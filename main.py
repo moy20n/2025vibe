@@ -100,4 +100,4 @@ if st.button("➕ 추천곡 추가하기"):
     else:
         st.warning("곡 제목을 입력해주세요!")
 
-st.caption("Made with ❤️ by ChatGPT")
+
